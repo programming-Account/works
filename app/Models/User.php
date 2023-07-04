@@ -51,4 +51,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+    
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+    
+    public function getByUser(int $limit_count = 5)
+    {
+        return $this->posts()->with('user')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
 }
