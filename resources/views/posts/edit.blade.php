@@ -18,9 +18,10 @@
         <main class="wrapper w-4/5 mx-auto">
             <h1 class="text-7xl text-center pt-5">Laravel</h1>
             <div class="bg-blue-50 border border-black-100">
-                <h2 class="pt-5 text-center text-xl">投稿の新規作成</h2>
-                <form action="/posts" method="POST" enctype="multipart/form-data">
+                <h2 class="pt-5 text-center text-xl">投稿の編集</h2>
+                <form action="/posts/{{ $post->id }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="create_post w-3/5 mx-auto py-5">
                         <div class="row_1 flex">
                             <div class="period">
@@ -42,20 +43,20 @@
                         </div>
                         <div class="tag">
                             <p>タグ機能</p>
-                            <input type="text" name="tag_name" value="{{ old('tag_name') }}" class="w-full">
+                            <input type="text" name="tag_name" value="" class="w-full"> <!--登録したタグネームをoldなどで表示-->
                         </div>
                         <div class="img_url">
                             <p>画像URL</p>
-                            <input type="file" multiple name="image_file[]" value="{{ old('image_file') }}" class="w-full">
+                            <input type="file" multiple name="image_file" class="w-full"></input>
                         </div>
                         <div class="body">
                             <p>内容</p>
-                            <textarea name="post[body]" class="w-full h-60">{{ old('post.body') }}</textarea>
+                            <textarea name="post[body]" class="w-full h-60">@if(count($errors)!==0){{ old('post.body') }}@else{{ $post->body }}@endif</textarea>
                             <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                         </div>
                     </div>
                     <div class="pb-5 text-center">
-                        <input type="submit" value="質問を投稿する" class="p-2 bg-blue-400 text-white text-center">
+                        <input type="submit" value="編集する" class="p-2 bg-blue-400 text-white text-center">
                     </div>
                 </form>
             </div>

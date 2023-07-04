@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
@@ -43,8 +44,23 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
     
+    public function post_images()
+    {
+        return $this->hasMany(PostImage::class);
+    }
+    
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+    
     public function getPaginateByLimit(int $limit_count = 10)
     {
-        return $this::with('user')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+        return $this->with('user')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
+    
+    public function isFavorite()
+    {
+        return $this->favorites()->where('user_id', Auth::id())->exists();
     }
 }
