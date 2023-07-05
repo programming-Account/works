@@ -48,12 +48,13 @@ Route::put('/posts/{post}', [PostController::class, 'update'])->name('update');
 Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('delete');
 Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('edit');
 
-Route::post('/comments', [CommentController::class, 'store'])->name('comment_store');
-Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comment_edit');
-Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comment_update');
-Route::delete('/comments/{comment}', [CommentController::class, 'delete'])->name('comment_delete');
+Route::post('/comments', [CommentController::class, 'store'])->name('comment.store');
+Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comment.edit');
+Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comment.update');
+Route::delete('/comments/{comment}', [CommentController::class, 'delete'])->name('comment.delete');
 
-Route::get('/users/{user}', [UserController::class, 'index']);
+Route::get('/users/{user}', [UserController::class, 'index'])->name('user.index');
+Route::get('/users/{user}/favorite', [UserController::class, 'showFavorite'])->name('show.favorite');
 
 //いいねボタン
 Route::get('/search/fovorite/{post}', [FavoriteController::class, 'favorite'])->name('favorite');

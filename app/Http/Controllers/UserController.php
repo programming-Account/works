@@ -11,4 +11,9 @@ class UserController extends Controller
     {
         return view('/users/personal_posts')->with(['posts' => $user->getByUser(), 'user' => $user]);
     }
+    
+    public function showFavorite(User $user)
+    {
+        return view('/users/favorite')->with(['favorites' => $user->getFavoritesByUser(), 'user' => $user]);
+    }
 }
