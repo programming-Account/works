@@ -13,7 +13,7 @@
     <!-- 質問 -->
         <h2 class="w-full h-8 p-2 border-b-4 border-gray-500">質問</h2>
         <div class="post w-3/5 m-auto p-2 bg-white rounded-xl">
-            <div class="flex">
+            <div class="profile flex">
                 <div class="user_img bg-green-200 w-10 h-10 rounded-full">
                 </div>
                 <div class="user_name">
@@ -23,54 +23,54 @@
                     {{ $post->created_at }}
                 </div>
             </div>
-            <p class="body">{{ $post->body }}</p>
-            @if(count($post->post_images)!==0)
-                <div class="image flex">
-                    @foreach($post->post_images as $image)
-                        <img src="{{ $image->img_url }}" alt="画像が読み込めません。"/>
-                    @endforeach
-                </div>
-            @endif
-            @if(count($post->tags)!==0)
-                <div class="tags flex">
-                    @foreach($post->tags as $tag)
-                        <p class="text-xs border border-black-100">#{{ $tag->name }}</p>
-                    @endforeach
-                </div>
-            @endif
+            <div class="content">
+                <p class="body">{{ $post->body }}</p>
+                @if(count($post->post_images)!==0)
+                    <div class="image flex">
+                        @foreach($post->post_images as $image)
+                            <img src="{{ $image->img_url }}" alt="画像が読み込めません。"/>
+                        @endforeach
+                    </div>
+                @endif
+                @if(count($post->tags)!==0)
+                    <div class="tags flex">
+                        @foreach($post->tags as $tag)
+                            <p class="text-xs border border-black-100">#{{ $tag->name }}</p>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
         </div>
     <!-- コメント -->
         <h2 class="w-full h-8 p-2 border-b-4 border-gray-500">コメント</h2>
-        <div class="comments">
-            <div class="comments w-3/5 mx-auto mb-5">
-                @foreach($post->comments as $comment)
-                    <div class="comment w-full p-2 bg-white rounded-xl">
-                        <div class="flex">
-                            <a href="/users/{{ $comment->user->id}}">
-                                <div class="user_img bg-green-200 w-10 h-10 rounded-full"></div>
-                            </a>
-                            <div class="user_name">
-                                {{ $comment->user->name }}
-                            </div>
-                            <div class="date ml-2">
-                                {{ $comment->created_at }}
-                            </div>
+            @foreach($post->comments as $comment)
+                <div class="comment w-3/5 mx-auto mt-2 p-2 bg-white rounded-xl">
+                    <div class="profile flex">
+                        <a href="/users/{{ $comment->user->id}}">
+                            <div class="user_img bg-green-200 w-10 h-10 rounded-full"></div>
+                        </a>
+                        <div class="user_name">
+                            {{ $comment->user->name }}
                         </div>
+                        <div class="date ml-2">
+                            {{ $comment->created_at }}
+                        </div>
+                    </div>
+                    <div class="content">
                         <P>{{ $comment->body }}</P>
                     </div>
-                    @if($comment->user->id == Auth::id())
-                        <div class="edit_delete flex mb-5">
-                            <button class="bg-gray-400"><a href="/comments/{{ $comment->id }}/edit">編集</a></button>
-                            <form action="/comments/{{ $comment->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-500">削除</button>
-                            </form>
-                        </div>
-                    @endif
-                @endforeach   
-            </div>
-        </div>
+                </div>
+                @if($comment->user->id == Auth::id())
+                    <div class="edit_delete flex mb-5">
+                        <button class="bg-gray-400"><a href="/comments/{{ $comment->id }}/edit">編集</a></button>
+                        <form action="/comments/{{ $comment->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-500">削除</button>
+                        </form>
+                    </div>
+                @endif
+            @endforeach   
     <!-- コメント送信 -->
         <form action="/comments" method="POST">
             @csrf

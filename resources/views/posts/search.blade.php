@@ -37,8 +37,8 @@
         <!-- 投稿一覧表示 -->
         @foreach($posts as $post)
             <div class="flex">
-                <div class=" post w-full mt-2 bg-white border rounded-xl border-black-100">
-                    <div class="flex">
+                <div class="post w-full mt-2 bg-white border rounded-xl border-black-100 p-3">
+                    <div class="profile flex">
                         <a href="/users/{{ $post->user->id }}">
                             <div class="user_img bg-green-200 w-10 h-10 rounded-full"></div>
                         </a>
@@ -49,25 +49,27 @@
                             {{ $post->created_at }}
                         </div>
                     </div>
-                    <a href="/search/{{ $post->id }}">
-                        <div class="body">
-                            {{ $post->body }}
-                        </div>
-                    </a>
-                    @if(count($post->post_images)!==0)
-                        <div class="image">
-                            @foreach($post->post_images as $image)
-                                <img src="{{ $image->img_url }}" alt="画像が読み込めません。"/>
-                            @endforeach
-                        </div>
-                    @endif
-                    @if(count($post->tags)!==0)
-                        <div class="tags flex">
-                            @foreach($post->tags as $tag)
-                                <p class="text-xs border border-black-100">#{{ $tag->name }}</p>
-                            @endforeach
-                        </div>
-                    @endif
+                    <div class="content">
+                        <a href="/search/{{ $post->id }}">
+                            <div class="body">
+                                {{ $post->body }}
+                            </div>
+                        </a>
+                        @if(count($post->post_images)!==0)
+                            <div class="image">
+                                @foreach($post->post_images as $image)
+                                    <img src="{{ $image->img_url }}" alt="画像が読み込めません。"/>
+                                @endforeach
+                            </div>
+                        @endif
+                        @if(count($post->tags)!==0)
+                            <div class="tags flex">
+                                @foreach($post->tags as $tag)
+                                    <p class="text-xs border border-black-100">#{{ $tag->name }}</p>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
                 </div>
                 <div class="like flex items-end">
                     @if($post->isFavorite())

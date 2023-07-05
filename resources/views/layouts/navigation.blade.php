@@ -21,7 +21,7 @@
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
                         {{ __('質問一覧') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                    <x-nav-link :href="route('show.favorite', Auth::user()->id)" :active="request()->routeIs('show.favorite')">
                         {{ __('お気に入り') }}
                     </x-nav-link>
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')">

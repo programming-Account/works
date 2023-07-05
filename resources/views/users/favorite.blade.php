@@ -11,36 +11,36 @@
         </div>
     </x-slot>
     <!-- 個人の質問一覧 -->
-    <h2 class="h-8 p-2 border-b-4 border-gray-500">{{ $user->name }}さんの質問一覧</h2>
+    <h2 class="h-8 p-2 border-b-4 border-gray-500">{{ $user->name }}さんのお気に入り</h2>
     <div class="posts w-3/5 m-auto">
-        @foreach($posts as $post)
+        @foreach($favorites as $favorite)
             <div class="flex">
                 <div class="post w-full mt-5 bg-white border rounded-xl border-black-100">
                     <div class="profile flex">
-                        <a href="/users/{{ $post->user->id }}">
+                        <a href="/users/{{ $favorite->user->id }}">
                             <div class="user_img w-10 h-10 bg-green-200 rounded-full"></div>
                         </a>
                         <div class="user_name">
-                            <a href="/users/{{ $post->user->id }}">{{ $post->user->name}}</a>
+                            <a href="/users/{{ $favorite->user->id }}">{{ $favorite->user->name}}</a>
                         </div>
                         <div class="date ml-2">
-                            {{ $post->created_at}}
+                            {{ $favorite->post->created_at}}
                         </div>
                     </div>
                     <div class="content">
                         <div class="body">
-                            <p>{{ $post->body }}</p>
+                            <p>{{ $favorite->post->body }}</p>
                         </div>
-                        @if(count($post->post_images)!==0)
+                        @if(count($favorite->post->post_images)!==0)
                             <div class="image">
-                                @foreach($post->post_images as $image)
+                                @foreach($favorite->post->post_images as $image)
                                     <img src="{{ $image->img_url }}" alt="画像が読み込めません。"/>
                                 @endforeach
                             </div>
                         @endif
-                        @if(count($post->tags)!==0)
+                        @if(count($favorite->post->tags)!==0)
                             <div class="tags flex">
-                                @foreach($post->tags as $tag)
+                                @foreach($favorite->post->tags as $tag)
                                     <p class="text-xs border border-black-100">#{{ $tag->name }}</p>
                                 @endforeach
                             </div>
@@ -48,21 +48,21 @@
                     </div>
                 </div>
                 <div class="like flex items-end">
-                    @if($post->isFavorite())
+                    @if($favorite->post->isFavorite())
                         <div>
-                            <a href="{{route('unfavorite', $post)}}" class="text-3xl text-red-500">♡</a>
+                            <a href="{{route('unfavorite', $favorite->post)}}" class="text-3xl text-red-500">♡</a>
                         </div>
                     @else
                         <div>
-                            <a href="{{route('favorite', $post)}}" class="text-3xl text-gray-400">♡</a>
+                            <a href="{{route('favorite', $favorite->post)}}" class="text-3xl text-gray-400">♡</a>
                         </div>
                     @endif
                 </div>
             </div>
-            @if($user->id == Auth::id())
+            @if($favorite->user->id == Auth::id())
                 <div class="edit_delete flex">
-                    <button class="bg-gray-400"><a href="/posts/{{ $post->id }}/edit">編集</a></button>
-                    <form action="/posts/{{ $post->id }}" method="POST">
+                    <button class="bg-gray-400"><a href="/posts/{{ $favorite->post->id }}/edit">編集</a></button>
+                    <form action="/posts/{{ $favorite->post->id }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="bg-red-500">削除</button>
