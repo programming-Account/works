@@ -40,7 +40,9 @@
                 <div class="post w-full mt-2 bg-white border rounded-xl border-black-100 p-3">
                     <div class="profile flex">
                         <a href="/users/{{ $post->user->id }}">
-                            <div class="user_img bg-green-200 w-10 h-10 rounded-full"></div>
+                            @if(!$post->user->img_url)
+                                <img class="w-14 h-14 rounded-full" src="https://res.cloudinary.com/dz7grtuvv/image/upload/v1688635881/kkrn_icon_user_3_n6tnp5.png">
+                            @endif
                         </a>
                         <div class="user_name">
                             <a href="/users/{{ $post->user->id }}">{{ $post->user->name }}</a>
@@ -49,23 +51,25 @@
                             {{ $post->created_at }}
                         </div>
                     </div>
+                    @if(count($post->tags)!==0)
+                        <div class="tags flex m-2">
+                            @foreach($post->tags as $tag)
+                                <p class="px-2 text-base border border-black-100">#{{ $tag->name }}</p>
+                            @endforeach
+                        </div>
+                    @endif
                     <div class="content">
                         <a href="/search/{{ $post->id }}">
                             <div class="body">
                                 {{ $post->body }}
                             </div>
                         </a>
-                        @if(count($post->post_images)!==0)
-                            <div class="image">
-                                @foreach($post->post_images as $image)
-                                    <img src="{{ $image->img_url }}" alt="画像が読み込めません。"/>
-                                @endforeach
-                            </div>
-                        @endif
-                        @if(count($post->tags)!==0)
-                            <div class="tags flex">
-                                @foreach($post->tags as $tag)
-                                    <p class="text-xs border border-black-100">#{{ $tag->name }}</p>
+                        @if(count($post->postImages)!==0)
+                            <div class="image flex flex-wrap">
+                                @foreach($post->postImages as $image)
+                                    <div class="w-1/3 p-2">
+                                        <img src="{{ $image->img_url }}" alt="画像が読み込めません。"/>
+                                    </div>
                                 @endforeach
                             </div>
                         @endif
@@ -74,11 +78,15 @@
                 <div class="like flex items-end">
                     @if($post->isFavorite())
                         <div>
-                            <a href="{{route('unfavorite', $post)}}" class="text-3xl text-red-500">♡</a>
+                            <a href="{{route('unfavorite', $post)}}" class="text-3xl">
+                                <img class="w-8" src="https://res.cloudinary.com/dz7grtuvv/image/upload/v1688621419/%E3%83%8F%E3%83%BC%E3%83%88%E3%81%AE%E3%83%9E%E3%83%BC%E3%82%AF_zdgpty.svg">
+                            </a>
                         </div>
                     @else
                         <div>
-                            <a href="{{route('favorite', $post)}}" class="text-3xl text-gray-400">♡</a>
+                            <a href="{{route('favorite', $post)}}" class="text-3xl">
+                                <img class="w-8" src="https://res.cloudinary.com/dz7grtuvv/image/upload/v1688621389/%E3%83%8F%E3%83%BC%E3%83%88%E3%81%AE%E3%83%9E%E3%83%BC%E3%82%AF2_yg1abi.svg">
+                            </a>
                         </div>
                     @endif
                 </div>

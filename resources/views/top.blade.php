@@ -9,7 +9,7 @@
             @csrf
             <p class="text-2xl">Laravelをはじめてどのくらい？</p>
             <select name="period_id">
-                <option>選択してください</option>
+                <option>選択して��ださい</option>
                 @foreach($periods as $period)
                     <option value="{{ $period->id }}">{{ $period->name }}</option>
                 @endforeach
@@ -17,11 +17,12 @@
             <div class="my-10 flex justify-around text-center">
             @foreach($categories as $category)
                 <div>
-                    <input type="radio" id="{{ $category->id }}" name="category_id" value="{{ $category->id }}" class="hidden peer"><label for="{{ $category->id }}" class="p-2 border border-black rounded-xl text-2xl hover:bg-blue-600 hover:text-white peer-checked:bg-red-600 peer-checked:text-white">{{ $category->name }}</label>
+                    <input type="radio" id="{{ $category->id }}" name="category_id" value="{{ $category->id }}" class="hidden peer">
+                    <label for="{{ $category->id }}" class="p-2 border border-black rounded-xl text-2xl hover:bg-blue-600 hover:text-white peer-checked:bg-red-600 peer-checked:text-white">{{ $category->name }}</label>
                 </div>
             @endforeach
             </div>
-            <input type="submit" value="検索" class="px-2 py-1 bg-blue-400 border border-black rounded hover:bg-blue-600 hover:text-white">
+            <input type="submit" value="検索" class="px-2 py-1 bg-blue-400 border border-black rounded text-white hover:bg-blue-600">
         </form>
     </div>
 </x-app-layout>
