@@ -133,7 +133,7 @@ class PostController extends Controller
         
         $input_post = $request['post'];
         $post->update($input_post);
-        
+        $post->tags()->detach();
         $post->tags()->attach($tags_id);
         
         //画像の更新
