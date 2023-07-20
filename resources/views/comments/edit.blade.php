@@ -30,10 +30,12 @@
                 </div>
             </div>
             <p class="body">{{ $comment->post->body }}</p>
-            @if(count($comment->post->post_images)!==0)
-                <div class="image flex">
-                    @foreach($comment->post->post_images as $image)
-                        <img src="{{ $image->img_url }}" alt="画像が読み込めません。"/>
+            @if(count($comment->post->postImages)!==0)
+                <div class="image flex flex-wrap">
+                    @foreach($comment->post->postImages as $image)
+                        <div class="w-1/3 p-2">
+                            <img src="{{ $image->img_url }}" alt="画像が読み込めません。"/>
+                        </div>
                     @endforeach
                 </div>
             @endif
@@ -48,10 +50,20 @@
         <!-- コメント編集 -->
         <h1 class="w-3/5 m-auto h-8 p-2 border-b-4 border-gray-500 text-center">コメントの編集</h1>
         <div class="comment w-3/5 m-auto mb-5">
-            <form action="/comments/{{ $comment->id }}" method="POST">
+            <form action="/comments/{{ $comment->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <textarea name="comment[body]" class="w-full bg-white rounded-xl">@if(count($errors)!==0){{ old('comment.body') }}@else{{ $comment->body }}@endif</textarea>
+                @if($comment->commentImages)
+                    <div class="image flex flex-wrap">
+                        @foreach($comment->commentImages as $image)
+                            <div class="w-1/3 p-2">
+                                <img src="{{ $image->img_url }}" alt="読み込めませんでした">
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+                <input type="file" multiple name="image_file[]" value="{{ old('image_file') }}" class="w-full">
                 <p class="body__error" style="color:red">{{ $errors->first('comment.body') }}</p>
                 <div class="pt-5 text-center">
                     <input type="submit" value="編集する" class="p-2 bg-blue-400 text-white text-center">

@@ -42,6 +42,18 @@ class CommentController extends Controller
     {
         $input = $request['comment'];
         $comment->fill($input)->save();
+        
+        if($request->file('image_file')){
+            $comment->commentImages()->delete();
+            foreach($request->file('image_file') as $image){
+                $image_url = Cloudinary::upload($image->getRealPath())->getSecurePath();
+                $comment_image = new CommentImage();
+                $comment_image->img_url = $image_url;
+                $comment_image->comment_id = $comment->id;
+                $comment_image->save();
+            }
+        };
+
         return redirect('/search/'. $comment->post->id);
     }
     

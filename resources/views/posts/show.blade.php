@@ -40,9 +40,12 @@
                 <div class="image flex flex-wrap">
                     @foreach($post->postImages as $image)
                         <div class="w-1/3 p-2">
-                            <img src="{{ $image->img_url }}" alt="画像が読み込めません。"/>
+                            <img class="zoom" src="{{ $image->img_url }}" alt="画像が読み込めません。"/>
                         </div>
                     @endforeach
+                    <div id="zoomback" class="hidden fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-80 justify-center items-center z-10">
+                        <img id="zoomimg" class="w-1/2">
+                    </div>
                 </div>
             @endif
         </div>
@@ -52,9 +55,9 @@
         @foreach($post->comments as $comment)
             <div class="comment w-3/5 mx-auto mt-2 p-2 bg-white rounded-xl">
                 <div class="profile flex">
-                    <a href="/users/{{ $comment->user->id}}">
-                        <div class="user_img bg-green-200 w-10 h-10 rounded-full"></div>
-                    </a>
+                    @if(!$comment->user->img_url)
+                        <img class="w-14 h-14 rounded-full" src="https://res.cloudinary.com/dz7grtuvv/image/upload/v1688635881/kkrn_icon_user_3_n6tnp5.png">
+                    @endif
                     <div class="user_name">
                         <a href="/users/{{ $comment->user->id}}">{{ $comment->user->name }}</a>
                     </div>
@@ -68,7 +71,7 @@
                         <div class="image flex flex-wrap">
                             @foreach($comment->commentImages as $image)
                                 <div class="w-1/3 p-2">
-                                    <img src="{{ $image->img_url }}" alt="読み込めませんでした">
+                                    <img class="zoom" src="{{ $image->img_url }}" alt="読み込めませんでした">
                                 </div>
                             @endforeach
                         </div>
@@ -76,12 +79,12 @@
                 </div>
             </div>
             @if($comment->user->id == Auth::id())
-                <div class="edit_delete flex mb-5">
-                    <button class="bg-gray-400"><a href="/comments/{{ $comment->id }}/edit">編集</a></button>
+                <div class="edit_delete w-3/5 mx-auto flex mb-5">
+                    <button class=""><a href="/comments/{{ $comment->id }}/edit">編集</a></button>
                     <form action="/comments/{{ $comment->id }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="bg-red-500">削除</button>
+                        <button type="submit" class="">削除</button>
                     </form>
                 </div>
             @endif
@@ -101,4 +104,31 @@
             </div>
         </form>
     </div>
+    <script>
+        // 要素を取得　
+        const zoom = document.querySelectorAll(".zoom");
+        const zoomback = document.getElementById("zoomback");
+        const zoomimg = document.getElementById("zoomimg");
+        
+        // 一括でイベントリスナ　
+        zoom.forEach(function(value){
+            value.addEventListener("click",kakudai)
+        });
+        
+        function kakudai(e) {
+            // 拡大領域を表示　
+            zoomback.style.display = "flex";
+            // 押された画像のリンクを渡す
+            zoomimg.setAttribute("src",e.target.getAttribute("src"));
+        }
+        
+        
+        // 元に戻すイベントリスナを指定
+        zoomback.addEventListener("click",modosu);
+        
+        // 拡大領域を無きものに　
+        function modosu() {
+            zoomback.style.display = "none";
+        }
+    </script>
 </x-app-layout>

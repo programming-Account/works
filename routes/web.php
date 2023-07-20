@@ -20,15 +20,7 @@ use App\Models\Period;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/top', function(){
+Route::get('/', function(){
     $category = new Category();
     $period = new Period();
     return view('top')->with(['periods' => $period->get(), 'categories' => $category->get()]);
