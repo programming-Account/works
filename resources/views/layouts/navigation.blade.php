@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('top') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <img src="https://res.cloudinary.com/dz7grtuvv/image/upload/v1690420335/22966988_qzvvhy.png" class="block h-9 w-auto fill-current" />
                     </a>
                 </div>
 

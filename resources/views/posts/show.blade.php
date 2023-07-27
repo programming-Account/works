@@ -80,11 +80,11 @@
             </div>
             @if($comment->user->id == Auth::id())
                 <div class="edit_delete w-3/5 mx-auto flex mb-5">
-                    <button class=""><a href="/comments/{{ $comment->id }}/edit">編集</a></button>
+                    <button class="bg-gray-400 hover:bg-gray-300 text-white rounded px-4 py-2"><a href="/comments/{{ $comment->id }}/edit">編集</a></button>
                     <form action="/comments/{{ $comment->id }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="">削除</button>
+                        <button type="submit" class="bg-red-600 hover:bg-red-500 text-white rounded px-4 py-2">削除</button>
                     </form>
                 </div>
             @endif
