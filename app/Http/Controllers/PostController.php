@@ -138,7 +138,7 @@ class PostController extends Controller
         
         //画像の更新
         if($request->file('image_file')){
-            $post->post_images()->delete();
+            $post->postImages()->delete();
             foreach($request->file('image_file') as $image){
                 $image_url = Cloudinary::upload($image->getRealPath())->getSecurePath();
                 $post_image = new PostImage();

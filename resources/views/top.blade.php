@@ -9,7 +9,7 @@
             @csrf
             <p class="text-2xl">Laravelをはじめてどのくらい？</p>
             <select name="period_id">
-                <option>選択して��ださい</option>
+                <option>選択してください</option>
                 @foreach($periods as $period)
                     <option value="{{ $period->id }}">{{ $period->name }}</option>
                 @endforeach

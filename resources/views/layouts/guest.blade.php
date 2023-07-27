@@ -18,10 +18,12 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    <img src="https://res.cloudinary.com/dz7grtuvv/image/upload/v1690420335/22966988_qzvvhy.png" class="w-20 h-20 fill-current text-gray-500" />
                 </a>
             </div>
-
+            <div>
+                <p class="text-gray-500">ログインすると投稿のお気に入り、質問作成、コメント送信などの機能が使えるようになります。</p>
+            </div>
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>

@@ -5,16 +5,13 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                    <a href="{{ route('top') }}">
+                        <img src="https://res.cloudinary.com/dz7grtuvv/image/upload/v1690420335/22966988_qzvvhy.png" class="block h-9 w-auto fill-current" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('top')" :active="request()->routeIs('top')">
                         {{ __('Top') }}
                     </x-nav-link>
@@ -91,8 +88,8 @@
     @if(Auth::user())
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
+                <x-responsive-nav-link :href="route('top')" :active="request()->routeIs('top')">
+                    {{ __('Top') }}
                 </x-responsive-nav-link>
             </div>
     
