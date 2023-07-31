@@ -37,7 +37,7 @@
         <!-- 投稿一覧表示 -->
         @foreach($posts as $post)
             <div class="flex">
-                <div class="post w-full mt-2 bg-white border rounded-xl border-black-100 p-3">
+                <div class="post w-full mt-2 bg-white border rounded-xl border-gray-500 p-3">
                     <div class="profile flex">
                         <a href="/users/{{ $post->user->id }}">
                             @if(!$post->user->img_url)

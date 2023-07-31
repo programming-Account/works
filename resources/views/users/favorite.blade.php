@@ -16,7 +16,7 @@
     <div class="posts w-3/5 mx-auto py-3">
         @foreach($favorites as $favorite)
             <div class="flex">
-                <div class="post w-full mt-5 p-2 bg-white border rounded-xl border-black-100">
+                <div class="post w-full mt-5 p-2 bg-white border rounded-xl border-gray-500">
                     <div class="profile flex">
                         <a href="/users/{{ $favorite->user->id }}">
                             @if(!$favorite->user->img_url)
