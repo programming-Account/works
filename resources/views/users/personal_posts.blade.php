@@ -16,7 +16,7 @@
     <div class="posts w-3/5 mx-auto py-3">
         @foreach($posts as $post)
             <div class="flex">
-                <div class="post w-full mt-3 p-2 bg-white border rounded-xl border-black-100">
+                <div class="post w-full mt-3 p-2 bg-white border rounded-xl border-gray-500">
                     <div class="profile flex">
                         @if(!$post->user->img_url)
                             <img class="w-14 h-14 rounded-full" src="https://res.cloudinary.com/dz7grtuvv/image/upload/v1688635881/kkrn_icon_user_3_n6tnp5.png">

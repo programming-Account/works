@@ -13,7 +13,7 @@
     </x-slot>
     <!-- 質問 -->
     <h2 class="w-full h-8 p-2 border-b-4 border-gray-500">質問</h2>
-    <div class="post w-3/5 mx-auto my-3 p-2 bg-white rounded-xl">
+    <div class="post w-3/5 mx-auto my-3 p-2 bg-white rounded-xl border-gray-500">
         <div class="profile flex">
             <a href="/users/{{ $post->user->id }}">
                 @if(!$post->user->img_url)
