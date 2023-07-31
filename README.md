@@ -1,4 +1,4 @@
-<h1 class="align-center">Board</h1>
+<div><h1 style="text-align: center;">Board</h1></div>
 
 ## 制作背景
 私はLaravelを学習している際に何度も困難にぶつかりました。<br>
@@ -24,7 +24,7 @@ BoradはLaravel初学者の方が気軽に質問できる場です。<br>
 - Github
 
 ## テーブル構成
-<img class="width-60" scr="https://res.cloudinary.com/dz7grtuvv/image/upload/v1690771236/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_18_jldzw0.png">
+<img width=80% src="https://res.cloudinary.com/dz7grtuvv/image/upload/v1690771236/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_18_jldzw0.png">
 
 ## 機能
 ▽投稿関連
